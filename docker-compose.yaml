@@ -18,3 +18,4 @@ services:
       - /etc/localtime:/etc/localtime:ro
       # for running with wsl on windows only
       - /mnt/wslg/:/mnt/wslg/
+      - /dev/dri:/dev/dri

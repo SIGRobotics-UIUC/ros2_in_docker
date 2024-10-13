@@ -29,6 +29,8 @@ COPY ./docker_settings/.tmux.conf.local /home/$USER_NAME/
 RUN sudo chown $USER_NAME /home/$USER_NAME/.tmux.conf.local
 
 # Update dependencies with rosdep
+RUN sudo apt-get update
+# RUN sudo apt-get install  
 WORKDIR /home/$USER_NAME/colcon_ws
 RUN sudo apt-get install -y python3-rosdep
 RUN rosdep update
@@ -38,6 +40,11 @@ RUN cd /tmp && rosdep install -i --from-path . --rosdistro humble -y
 
 # Install ROS2/Additional dependencies
 RUN sudo apt-get install -y htop
+RUN sudo apt-get install -y ros-humble-gazebo-*
+RUN sudo apt-get install -y ros-humble-dynamixel-sdk ros-humble-ros2-control ros-humble-ros2-controllers ros-humble-gripper-controllers ros-humble-moveit ros-humble-moveit-servo
+RUN sudo apt-get install -y ros-humble-turtlebot3
+RUN sudo apt-get update
+RUN sudo apt-get upgrade -y 
 
 # bash settings
 COPY ./docker_settings/.bashrc /tmp/.bashrc
